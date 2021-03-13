@@ -6,7 +6,7 @@ import com.spring.todo.todolistspringboot.dto.TodoDTO;
 import com.spring.todo.todolistspringboot.model.Todo;
 
 
-public interface TodoService {
+public interface ITodoService {
 
     public List<Todo> getAllTodos();
 

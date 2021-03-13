@@ -21,13 +21,13 @@ public class Todo {
     @Id
     private String id;
 
-    @NotNull(message="Todo cannot be null")
+    @NotNull(message="Todo não pode ser null")
     private String todo;
 
-    @NotNull(message="Description cannot be null")
+    @NotNull(message="Description não pode ser null")
     private String description;
 
-    @NotNull(message="Completed cannot be null")
+    @NotNull(message="Completed não pode ser null")
     private Boolean completed;
 
     private Date createdAt;

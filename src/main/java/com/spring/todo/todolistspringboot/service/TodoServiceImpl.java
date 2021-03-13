@@ -12,7 +12,9 @@ import com.spring.todo.todolistspringboot.repository.TodoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TodoServiceImpl implements ITodoService {
 
     @Autowired
@@ -61,24 +63,22 @@ public class TodoServiceImpl implements ITodoService {
 
        Todo  todo = getTodoById(id);
 
-        Todo todoUpdate = new Todo(todo.getId(),
-                todoDTO.getTodo() == null?
-                todo.getTodo() : todoDTO.getTodo(),
-                todoDTO.getDescription() == null?
-                        todo.getDescription(): todoDTO.getDescription(),
-                todoDTO.getCompleted() == null? todo.getCompleted():todoDTO.getCompleted(),
+        Todo todoUpdate = new Todo(
+                todo.getId(),
+                todoDTO.getTodo() == null ? todo.getTodo() : todoDTO.getTodo(),
+                todoDTO.getDescription() == null ? todo.getDescription() : todoDTO.getDescription(),
+                todoDTO.getCompleted() == null ? todo.getCompleted() : todoDTO.getCompleted(),
                 todo.getCreatedAt(),
-                new Date());
+                new Date()
+            );
 
         return repository.save(todoUpdate);
     }
 
     @Override
     public void deleteTodoById(String id) {
-
             getTodoById(id);
             repository.deleteById(id);
-
     }
 
 }

@@ -10,11 +10,11 @@ public interface TodoService {
 
     public List<Todo> getAllTodos();
 
-    public Todo getSingleTodo(String id);
+    public Todo getTodoById(String id);
 
-    public void createTodo(TodoDTO todo);
+    public String createTodo(TodoDTO todo);
 
-    public void updateTodo(String id, TodoDTO todo);
+    public Todo updateTodo(String id, TodoDTO todo);
 
     public void deleteTodoById(String id);
 }

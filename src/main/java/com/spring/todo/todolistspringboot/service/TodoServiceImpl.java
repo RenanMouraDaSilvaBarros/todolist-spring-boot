@@ -51,14 +51,33 @@ public class TodoServiceImpl implements ITodoService {
 
 
     @Override
-    public Todo updateTodo(String id, TodoDTO todo) {
-        // TODO Auto-generated method stub
-        return null;
+    public Todo updateTodo(String id, TodoDTO todoDTO) {
+
+        boolean todoIsPresnt = repository.findByTodo(todoDTO.getTodo()).isPresent();
+
+        if(todoIsPresnt){
+            throw new TodoException(HttpStatus.CONFLICT, "TODO já existente!");
+        }
+
+       Todo  todo = getTodoById(id);
+
+        Todo todoUpdate = new Todo(todo.getId(),
+                todoDTO.getTodo() == null?
+                todo.getTodo() : todoDTO.getTodo(),
+                todoDTO.getDescription() == null?
+                        todo.getDescription(): todoDTO.getDescription(),
+                todoDTO.getCompleted() == null? todo.getCompleted():todoDTO.getCompleted(),
+                todo.getCreatedAt(),
+                new Date());
+
+        return repository.save(todoUpdate);
     }
 
     @Override
     public void deleteTodoById(String id) {
-        // TODO Auto-generated method stub
+
+            getTodoById(id);
+            repository.deleteById(id);
 
     }
 

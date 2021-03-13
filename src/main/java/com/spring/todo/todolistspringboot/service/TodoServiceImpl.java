@@ -1,5 +1,6 @@
 package com.spring.todo.todolistspringboot.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,13 +36,22 @@ public class TodoServiceImpl implements ITodoService {
 
     @Override
     public String createTodo(TodoDTO todo) {
-        Todo save = new Todo();
+        boolean todoIsPresnt = repository.findByTodo(todo.getTodo()).isPresent();
 
-        // repository.findByTodo(todo.getTodo());
+        if(todoIsPresnt){
+            throw new TodoException(HttpStatus.CONFLICT, "TODO já existente!");
+        }
 
-        // repository.save();
-
-        return null;
+        return repository.save(
+            new Todo(
+                    null, 
+                    todo.getTodo(), 
+                    todo.getDescription(), 
+                    todo.getCompleted(), 
+                    new Date(), 
+                    new Date()
+            )
+        ).getId();
     }
 
     @Override

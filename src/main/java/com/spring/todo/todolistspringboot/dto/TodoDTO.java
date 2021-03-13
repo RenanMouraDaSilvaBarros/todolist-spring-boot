@@ -18,8 +18,4 @@ public class TodoDTO {
     private String description;
 
     private Boolean completed;
-
-    private Date createdAt;
-
-    private Date updatedAt;
 }

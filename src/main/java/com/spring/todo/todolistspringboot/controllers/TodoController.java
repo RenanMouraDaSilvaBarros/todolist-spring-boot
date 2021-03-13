@@ -31,7 +31,8 @@ public class TodoController {
 
     @PutMapping("/todos/{id}")
     public void update(String id, TodoDTO todoDTO){
-
+        System.out.println(id);
+        System.out.println(todoDTO);
     }
 
 

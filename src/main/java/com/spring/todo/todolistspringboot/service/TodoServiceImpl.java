@@ -33,6 +33,7 @@ public class TodoServiceImpl implements ITodoService {
 
         throw new TodoException(HttpStatus.NOT_FOUND, "TODO não encontrado!");
     }
+    
 
     @Override
     public String createTodo(TodoDTO todo) {
@@ -42,17 +43,12 @@ public class TodoServiceImpl implements ITodoService {
             throw new TodoException(HttpStatus.CONFLICT, "TODO já existente!");
         }
 
-        return repository.save(
-            new Todo(
-                    null, 
-                    todo.getTodo(), 
-                    todo.getDescription(), 
-                    todo.getCompleted(), 
-                    new Date(), 
-                    new Date()
-            )
-        ).getId();
+        Todo save = new Todo(null, todo.getTodo(), todo.getDescription(), 
+                                todo.getCompleted(), new Date(), new Date());
+
+        return repository.save(save).getId();
     }
+
 
     @Override
     public Todo updateTodo(String id, TodoDTO todo) {
